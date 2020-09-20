@@ -1,0 +1,9 @@
+<library path="lib/libros_astra_sdk_nodelet">
+
+  <class name="ros_astra_sdk_wrapper/AstraDriverNodelet" type="ros_astra_sdk_wrapper::AstraDriverNodelet" base_class_type="nodelet::Nodelet">
+    <description>
+      Astra sdk wrapper nodelet.
+    </description>
+  </class>
+
+</library>

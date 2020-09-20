@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="ros_astra_sdk_wrapper" type="astra_sdk_node" name="astra_sdk_node" output="screen" />
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot2i_bringup)/rviz/turtlebot2i.rviz" />
+
+</launch>

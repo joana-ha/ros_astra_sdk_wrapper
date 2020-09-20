@@ -1,0 +1,36 @@
+<!-- Launch the OpenNI2 device driver -->
+<launch>
+
+    <!-- Name of nodelet manager, must be fully resolved -->
+    <arg name="manager" />
+
+    <arg name="depth_registration" default="true" />
+    <arg name="color_depth_synchronization" default="false" />
+    <arg name="auto_exposure" default="true" />
+    <arg name="auto_white_balance" default="true" />
+
+    <arg name="respawn" default="false" />
+
+    <!-- Remapping arguments -->
+    <arg name="rgb"              default="rgb" />
+    <arg name="ir"               default="ir" />
+    <arg name="depth"            default="depth" />
+    <arg name="depth_registered" default="depth_registered" />
+
+    <!-- Driver nodelet -->
+    <node pkg="nodelet" type="nodelet" name="driver"
+          args="load ros_astra_sdk_wrapper/AstraDriverNodelet $(arg manager)"
+          respawn="$(arg respawn)">
+        <param name="depth_registration" value="$(arg depth_registration)" />
+        <param name="color_depth_synchronization" value="$(arg color_depth_synchronization)" />
+
+        <remap from="ir" to="$(arg ir)" />
+        <remap from="rgb" to="$(arg rgb)" />
+        <remap from="depth" to="$(arg depth)" />
+        <remap from="depth_registered" to="$(arg depth_registered)" />
+
+        <remap from="$(arg rgb)/image" to="$(arg rgb)/image_raw" />
+        <remap from="$(arg depth)/image" to="$(arg depth_registered)/image_raw" />
+    </node>
+
+</launch>
