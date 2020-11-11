@@ -14,7 +14,7 @@ int32 mid_spine_tracking_status
 
 # Point32 position2D # x,y in camera frame, z distance from camera
 
-#Position of interesting joints
+# Position of interesting joints in 3d
 
 geometry_msgs/Point32 joint_position_rfoot
 geometry_msgs/Point32 joint_position_lfoot
@@ -24,5 +24,31 @@ geometry_msgs/Point32 joint_position_rhip
 geometry_msgs/Point32 joint_position_lhip
 geometry_msgs/Point32 joint_position_base_spine
 geometry_msgs/Point32 joint_position_mid_spine
+
+# Position of interesting joints in pixel/sensor space in 2D
+
+float64 pxl_joint_position_rfoot_x
+float64 pxl_joint_position_rfoot_y
+
+float64 pxl_joint_position_lfoot_x
+float64 pxl_joint_position_lfoot_y
+
+float64 pxl_joint_position_rknee_x
+float64 pxl_joint_position_rknee_y
+
+float64 pxl_joint_position_lknee_x
+float64 pxl_joint_position_lknee_y
+
+float64 pxl_joint_position_rhip_x
+float64 pxl_joint_position_rhip_y
+
+float64 pxl_joint_position_lhip_x
+float64 pxl_joint_position_lhip_y
+
+float64 pxl_joint_position_base_spine_x
+float64 pxl_joint_position_base_spine_y
+
+float64 pxl_joint_position_mid_spine_x
+float64 pxl_joint_position_mid_spine_y
 
 

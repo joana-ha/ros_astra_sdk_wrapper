@@ -36,21 +36,17 @@ namespace ros_astra_sdk_wrapper{
             image->height = depthFrame.height();
 
             std::size_t data_size = depthFrame.byte_length();
-            //ROS_DEBUG("byte length: ", (int) data_size);
-            std::size_t data_length = depthFrame.length();
-            //ROS_DEBUG("byte length: ", (int) data_length);
 
             image->data.resize(data_size);
 
-            memcpy(&image->data[0], depthFrame.data(), data_size);
+            int16_t *depth_values = (int16_t *)depthFrame.data();
+
+            memcpy(&image->data[0], depth_values, data_size);
 
             image->is_bigendian = 0;
 
-            //image->encoding = sensor_msgs::image_encodings::TYPE_8UC1;
-            //image->step = sizeof(char) * image->width; //TODO (?)
-
             image->encoding = sensor_msgs::image_encodings::TYPE_16UC1;
-            image->step = sizeof(char) * 2 * image->width; //TODO (?)
+            image->step = sizeof(char) * 2 * image->width; 
 
             callback_(image);
         }
@@ -180,10 +176,14 @@ namespace ros_astra_sdk_wrapper{
             skeleton_data.joint_position_rfoot.x = 0;
             skeleton_data.joint_position_rfoot.y = 0;
             skeleton_data.joint_position_rfoot.z = 0;
+            skeleton_data.pxl_joint_position_rfoot_x = 0;
+            skeleton_data.pxl_joint_position_rfoot_y = 0;
         }else{
             skeleton_data.joint_position_rfoot.x = jointRFoot.world_position().z / 1000.0;
             skeleton_data.joint_position_rfoot.y = jointRFoot.world_position().x / 1000.0;
             skeleton_data.joint_position_rfoot.z = jointRFoot.world_position().y / 1000.0;
+            skeleton_data.pxl_joint_position_rfoot_x = jointRFoot.depth_position().x;
+            skeleton_data.pxl_joint_position_rfoot_y = jointRFoot.depth_position().y;
         }
 
         //left foot
@@ -193,10 +193,14 @@ namespace ros_astra_sdk_wrapper{
             skeleton_data.joint_position_lfoot.x = 0;
             skeleton_data.joint_position_lfoot.y = 0;
             skeleton_data.joint_position_lfoot.z = 0;
+            skeleton_data.pxl_joint_position_lfoot_x = 0;
+            skeleton_data.pxl_joint_position_lfoot_y = 0;
         }else{
             skeleton_data.joint_position_lfoot.x = jointLFoot.world_position().z / 1000.0;
             skeleton_data.joint_position_lfoot.y = jointLFoot.world_position().x / 1000.0;
             skeleton_data.joint_position_lfoot.z = jointLFoot.world_position().y / 1000.0;
+            skeleton_data.pxl_joint_position_lfoot_x = jointLFoot.depth_position().x;
+            skeleton_data.pxl_joint_position_lfoot_y = jointLFoot.depth_position().y;
         }
 
 
@@ -207,10 +211,14 @@ namespace ros_astra_sdk_wrapper{
             skeleton_data.joint_position_rknee.x = 0;
             skeleton_data.joint_position_rknee.y = 0;
             skeleton_data.joint_position_rknee.z = 0;
+            skeleton_data.pxl_joint_position_rknee_x = 0;
+            skeleton_data.pxl_joint_position_rknee_y = 0;
         }else{
             skeleton_data.joint_position_rknee.x = jointRKnee.world_position().z / 1000.0;
             skeleton_data.joint_position_rknee.y = jointRKnee.world_position().x / 1000.0;
             skeleton_data.joint_position_rknee.z = jointRKnee.world_position().y / 1000.0;
+            skeleton_data.pxl_joint_position_rknee_x = jointRKnee.depth_position().x;
+            skeleton_data.pxl_joint_position_rknee_y = jointRKnee.depth_position().y;
         }
 
         //left knee
@@ -220,10 +228,14 @@ namespace ros_astra_sdk_wrapper{
             skeleton_data.joint_position_lknee.x = 0;
             skeleton_data.joint_position_lknee.y = 0;
             skeleton_data.joint_position_lknee.z = 0;
+            skeleton_data.pxl_joint_position_lknee_x = 0;
+            skeleton_data.pxl_joint_position_lknee_y = 0;
         }else{
             skeleton_data.joint_position_lknee.x = jointLKnee.world_position().z / 1000.0;
             skeleton_data.joint_position_lknee.y = jointLKnee.world_position().x / 1000.0;
             skeleton_data.joint_position_lknee.z = jointLKnee.world_position().y / 1000.0;
+            skeleton_data.pxl_joint_position_lknee_x = jointLKnee.depth_position().x;
+            skeleton_data.pxl_joint_position_lknee_y = jointLKnee.depth_position().y;
         }
 
         //right hip
@@ -233,10 +245,14 @@ namespace ros_astra_sdk_wrapper{
             skeleton_data.joint_position_rhip.x = 0;
             skeleton_data.joint_position_rhip.y = 0;
             skeleton_data.joint_position_rhip.z = 0;
+            skeleton_data.pxl_joint_position_rhip_x = 0;
+            skeleton_data.pxl_joint_position_rhip_y = 0;
         }else{
             skeleton_data.joint_position_rhip.x = jointRHip.world_position().z / 1000.0;
             skeleton_data.joint_position_rhip.y = jointRHip.world_position().x / 1000.0;
             skeleton_data.joint_position_rhip.z = jointRHip.world_position().y / 1000.0;
+            skeleton_data.pxl_joint_position_rhip_x = jointRHip.depth_position().x;
+            skeleton_data.pxl_joint_position_rhip_y = jointRHip.depth_position().y;
         }
 
         //left hip
@@ -246,10 +262,14 @@ namespace ros_astra_sdk_wrapper{
             skeleton_data.joint_position_lhip.x = 0;
             skeleton_data.joint_position_lhip.y = 0;
             skeleton_data.joint_position_lhip.z = 0;
+            skeleton_data.pxl_joint_position_lhip_x = 0;
+            skeleton_data.pxl_joint_position_lhip_y = 0;
         }else{
             skeleton_data.joint_position_lhip.x = jointLHip.world_position().z / 1000.0;
             skeleton_data.joint_position_lhip.y = jointLHip.world_position().x / 1000.0;
             skeleton_data.joint_position_lhip.z = jointLHip.world_position().y / 1000.0;
+            skeleton_data.pxl_joint_position_lhip_x = jointLHip.depth_position().x;
+            skeleton_data.pxl_joint_position_lhip_y = jointLHip.depth_position().y;
         }
 
         //base spine
@@ -259,10 +279,14 @@ namespace ros_astra_sdk_wrapper{
             skeleton_data.joint_position_base_spine.x = 0;
             skeleton_data.joint_position_base_spine.y = 0;
             skeleton_data.joint_position_base_spine.z = 0;
+            skeleton_data.pxl_joint_position_base_spine_x = 0;
+            skeleton_data.pxl_joint_position_base_spine_y = 0;
         }else{
             skeleton_data.joint_position_base_spine.x = jointBaseSpine.world_position().z / 1000.0;
             skeleton_data.joint_position_base_spine.y = jointBaseSpine.world_position().x / 1000.0;
             skeleton_data.joint_position_base_spine.z = jointBaseSpine.world_position().y / 1000.0;
+            skeleton_data.pxl_joint_position_base_spine_x = jointBaseSpine.depth_position().x;
+            skeleton_data.pxl_joint_position_base_spine_y = jointBaseSpine.depth_position().y;
         }
 
         //mid spine
@@ -272,10 +296,14 @@ namespace ros_astra_sdk_wrapper{
             skeleton_data.joint_position_mid_spine.x = 0;
             skeleton_data.joint_position_mid_spine.y = 0;
             skeleton_data.joint_position_mid_spine.z = 0;
+            skeleton_data.pxl_joint_position_mid_spine_x = 0;
+            skeleton_data.pxl_joint_position_mid_spine_y = 0;
         }else{
             skeleton_data.joint_position_mid_spine.x = jointMidSpine.world_position().z / 1000.0;
             skeleton_data.joint_position_mid_spine.y = jointMidSpine.world_position().x / 1000.0;
             skeleton_data.joint_position_mid_spine.z = jointMidSpine.world_position().y / 1000.0;
+            skeleton_data.pxl_joint_position_mid_spine_x = jointMidSpine.depth_position().x;
+            skeleton_data.pxl_joint_position_mid_spine_y = jointMidSpine.depth_position().y;
         }
 
         if(skeleton_data.joint_position_base_spine.x == prev_skeleton_data_.joint_position_base_spine.x){
@@ -283,28 +311,6 @@ namespace ros_astra_sdk_wrapper{
         }else{
             skeleton_data.valid_body_status = true;
         }
-
-        /*if(prev_skeleton_data_.body_id != -1 && skeleton_data.base_spine_tracking_status == 2 && current_robot_vel_ != 0) {
-            time_difference = current_time_stamp.toSec() - prev_time_stamp_.toSec();
-            current_human_vel = sqrt(pow(
-                    (skeleton_data.joint_position_base_spine.x - prev_skeleton_data_.joint_position_base_spine.x),
-                    2.0)) / time_difference;
-
-            std::cout << "current human vel: " << current_human_vel << std::endl;
-
-            //ROS_INFO("current human vel was calculated");
-        }else{
-            prev_valid_body_id_ = -1;
-            current_human_vel = -1.0;
-        }
-
-        if((current_human_vel < (current_robot_vel_*1.3))){
-            prev_valid_body_id_ = -1;
-            skeleton_data.valid_body_status = true;
-        }else{
-            skeleton_data.valid_body_status = true;
-            prev_valid_body_id_ = current_bodyId;
-        }*/
 
         prev_skeleton_data_ = skeleton_data;
         prev_time_stamp_ = current_time_stamp;

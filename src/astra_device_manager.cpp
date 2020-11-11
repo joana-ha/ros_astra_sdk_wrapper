@@ -20,7 +20,7 @@ namespace ros_astra_sdk_wrapper{
     {
 
         info_ = boost::make_shared<sensor_msgs::CameraInfo>();
-        licenseString_ = "uZoEtt/kVVhzZe15hT0qVB5cSHaOFYu74UxoFru3TiQN2JjujjzB0skJa6QV0pIdxmTfuhLvscX2cpdtsh3mAU5hbWU9SmFrb2IgUmVpbmhhcmR0fE9yZz1UZWNobmljYWwgVW5pdmVyc2l0eSBNdW5pY2gsIEZha3VsdMOkdCBNYXNjaGluZW53ZXNlbiwgTGVocnN0dWhsIGbDvHIgRXJnb25vbWllfENvbW1lbnQ9ZXlKamIyMXRaVzUwSWpvaWEyVjVYMk4xYzNSdmJXVnlJaXdpWTNWemRHOXRaWEpmZEhsd1pTSTZJbWx0Y0c5eWRHRnVkQ0lzSW14cFkyVnVjMlZmZEhsd1pTSTZJbTl1YkdsdVpTSXNJblpsY25OcGIyNGlPakY5fEV4cGlyYXRpb249OTk5OTk5OTk5OQ==";
+        licenseString_ = "";
 
         //set_key_handler();
         for(int i=0; i < 100; i++){
